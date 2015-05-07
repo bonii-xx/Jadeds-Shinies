@@ -36,7 +36,6 @@ repositories {
 
 apply plugin: 'forge'
 
-version = "1.0"
 group= "boni" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "JadedsShinies"
 
@@ -54,7 +53,7 @@ dependencies {
     compile "tconstruct:TConstruct:${config.minecraft_version}-${config.tconstruct_version}:deobf"
 }
 
-version = "${config.minecraft_version}"
+version = "${config.minecraft_version}-${config.mod_version}"
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
