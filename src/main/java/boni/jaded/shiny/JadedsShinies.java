@@ -4,6 +4,7 @@ import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
+import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.fluids.Fluid;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
@@ -79,6 +80,8 @@ public class JadedsShinies {
     FluidType.registerFluidType("PlasSteel", TinkerSmeltery.glueBlock, 0, 200, plassteelFluid, true);
     FluidType.registerFluidType("Plastic", TinkerSmeltery.glueBlock, 0, 200, plasticFluid, true);
     FluidType.registerFluidType("WitherIron", Blocks.iron_block, 0, 200, witherironFluid, true);
+
+    MinecraftForge.EVENT_BUS.register(new ToolEvents());
   }
 
   @EventHandler
@@ -88,15 +91,15 @@ public class JadedsShinies {
     for(ItemStack onion : OreDictionary.getOres("cropOnion")) {
       if(!registered) {
         PatternBuilder.instance
-            .registerFullMaterial(onion, 1, "materialOnion", new ItemStack(TinkerTools.toolShard, 1, 55),
-                                  new ItemStack(TinkerTools.toolRod, 1, 55), 55);
+            .registerFullMaterial(onion, 1, "materialOnion", new ItemStack(TinkerTools.toolShard, 1, ONION_ID),
+                                  new ItemStack(TinkerTools.toolRod, 1, ONION_ID), ONION_ID);
         registered = true;
       }
       else {
         PatternBuilder.instance.registerMaterial(onion, 1, "materialOnion");
       }
 
-      registerPartBuilding(55);
+      registerPartBuilding(ONION_ID);
     }
 
     // smelting of plastic
@@ -132,6 +135,8 @@ public class JadedsShinies {
     Smeltery.addAlloyMixing(new FluidStack(plassteelFluid, amount * 2),
                             new FluidStack(TinkerSmeltery.moltenSteelFluid, amount * 2),
                             new FluidStack(plasticFluid, amount));
+
+    TConstructRegistry.registerActiveToolMod(new JadedActiveToolMod());
   }
 
   @EventHandler
