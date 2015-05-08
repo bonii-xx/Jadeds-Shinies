@@ -33,6 +33,23 @@ public class JadedsShinies {
 
   public static final String MODID = "JadedsShinies";
 
+  public static final int ONION_ID = 55;
+  public static final int WITHER_ID = 656;
+  public static final int PLASSTEEL_ID =578 ;
+
+  public static final int MITHRIL_ID = 588;
+  public static final int ENDERIUM_ID = 598;
+  public static final int SIGNALUM_ID = 608;
+  public static final int LUMIUM_ID = 618;
+
+  // MFR
+  public static final int PLASTIC_ID = 1000;
+
+  // ExtraTiC
+  public static final int MANASTEEL_ID = 145;
+  public static final int TERRASTEEL_ID = 146;
+  public static final int ELEMENTIUM_ID = 146;
+
   public static Fluid plassteelFluid;
   public static Fluid plasticFluid;
   public static Fluid witherironFluid;
@@ -40,19 +57,19 @@ public class JadedsShinies {
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     // Custom materials
-    registerMaterial(55, "materialOnion", 0, 10, 90, 6, 0.3f, 0, 0xFAF9C3, 0, 7.0f, 10, 0.1f);
-    registerMaterial(656, "materialwitherIron", 8, 1500, 300, 9, 1.2f, 0, 0xDFC3FA, 2, 0.52f, 5, 3);
-    registerMaterial(578, "materialPlassteel", 5, 900, 700, 8, 0.3f, 2, 0x91A5B3, 0, 5.0f, 7, 4.0f);
+    registerMaterial(ONION_ID, "materialOnion", 0, 10, 90, 6, 0.3f, 0, 0xFAF9C3, 0, 7.0f, 10, 0.1f);
+    registerMaterial(WITHER_ID, "materialwitherIron", 8, 1500, 300, 9, 1.2f, 0, 0xDFC3FA, 2, 0.52f, 5, 3);
+    registerMaterial(PLASSTEEL_ID, "materialPlassteel", 5, 900, 700, 8, 0.3f, 2, 0x91A5B3, 0, 5.0f, 7, 4.0f);
 
     // Thermal Foundation Materials
-    registerMaterial(588, "materialMithril", 10, 2100, 1000, 14, 2.0f, 1, 0xC19BEB, 7, 8.0f, 10, 8.0f);
-    registerMaterial(598, "materialEnderium", 8, 1100, 2300, 16, 2.0f, 1, 0x148C99, 9, 0.2f, 6, 3.0f);
-    registerMaterial(608, "materialSignalum", 10, 800, 1300, 11, 1.0f, 0, 0xF78B3E, 3, 0.8f, 3, 7.0f);
-    registerMaterial(618, "materialLumium", 10, 800, 1100, 6, 2.5f, 0, 0xFAFA9B, 2, 0.5f, 2, 8.0f);
+    registerMaterial(MITHRIL_ID, "materialMithril", 10, 2100, 1000, 14, 2.0f, 1, 0xC19BEB, 7, 8.0f, 10, 8.0f);
+    registerMaterial(ENDERIUM_ID, "materialEnderium", 8, 1100, 2300, 16, 2.0f, 1, 0x148C99, 9, 0.2f, 6, 3.0f);
+    registerMaterial(SIGNALUM_ID, "materialSignalum", 10, 800, 1300, 11, 1.0f, 0, 0xF78B3E, 3, 0.8f, 3, 7.0f);
+    registerMaterial(LUMIUM_ID, "materialLumium", 10, 800, 1100, 6, 2.5f, 0, 0xFAFA9B, 2, 0.5f, 2, 8.0f);
 
     // Botania Materials
-    registerMaterial(619, "materialManaSteel", 6, 800, 400, 18, 2.5f, 0, 0x9BCFFA, 8, 20.0f, 2, 6.0f);
-    registerMaterial(620, "materialTerraSteel", 7, 900, 600, 22, 1.5f, 0, 0x9BFAB9, 8, 0.3f, 2, 8.0f);
+    //registerMaterial(619, "materialManaSteel", 6, 800, 400, 18, 2.5f, 0, 0x9BCFFA, 8, 20.0f, 2, 6.0f);
+    //registerMaterial(620, "materialTerraSteel", 7, 900, 600, 22, 1.5f, 0, 0x9BFAB9, 8, 0.3f, 2, 8.0f);
 
     // The liquids not in Tinkers
     plassteelFluid = registerFluid("plassteel", 0x91A5B3);
@@ -96,17 +113,17 @@ public class JadedsShinies {
       Smeltery.addMelting(FluidType.getFluidType("WitherIron"), witherIron, 0, TConstruct.ingotLiquidValue);
 
     // liquid parts
-    registerCasting(witherironFluid, 656);
-    registerCasting(plassteelFluid, 578);
+    registerCasting(witherironFluid, WITHER_ID);
+    registerCasting(plassteelFluid, PLASSTEEL_ID);
 
     if(Loader.isModLoaded("MineFactoryReloaded"))
-      registerCasting(plasticFluid, 1000);
+      registerCasting(plasticFluid, PLASTIC_ID);
 
     if(Loader.isModLoaded("ThermalFoundation")) {
-      registerCasting(TinkerSmeltery.moltenMithrilFluid, 588);
-      registerCasting(TinkerSmeltery.moltenEnderiumFluid, 598);
-      registerCasting(TinkerSmeltery.moltenSignalumFluid, 608);
-      registerCasting(TinkerSmeltery.moltenLumiumFluid, 618);
+      registerCasting(TinkerSmeltery.moltenMithrilFluid, MITHRIL_ID);
+      registerCasting(TinkerSmeltery.moltenEnderiumFluid, ENDERIUM_ID);
+      registerCasting(TinkerSmeltery.moltenSignalumFluid, SIGNALUM_ID);
+      registerCasting(TinkerSmeltery.moltenLumiumFluid, LUMIUM_ID);
     }
 
 
