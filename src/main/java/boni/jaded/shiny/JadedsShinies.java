@@ -20,6 +20,7 @@ import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.registry.GameRegistry;
 import tconstruct.TConstruct;
 import tconstruct.library.TConstructRegistry;
+import tconstruct.library.client.TConstructClientRegistry;
 import tconstruct.library.crafting.FluidType;
 import tconstruct.library.crafting.LiquidCasting;
 import tconstruct.library.crafting.PatternBuilder;
@@ -141,7 +142,12 @@ public class JadedsShinies {
 
   @EventHandler
   public void postInit(FMLPostInitializationEvent event) {
-
+    // register material mappings
+    if(event.getSide().isClient()) {
+      int[] ids = new int[] {ONION_ID, WITHER_ID, PLASSTEEL_ID, MITHRIL_ID, ENDERIUM_ID, SIGNALUM_ID, LUMIUM_ID};
+      for(int id : ids)
+        TConstructClientRegistry.addMaterialRenderMapping(id, "tinker", TConstructRegistry.getMaterial(id).name(), true);
+    }
   }
 
   private void registerMaterial(int id, String name, int hlvl, int durability, int speed,
