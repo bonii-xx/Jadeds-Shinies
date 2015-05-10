@@ -35,6 +35,7 @@ repositories {
 }
 
 apply plugin: 'forge'
+apply plugin: 'curseforge'
 
 group= "boni" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "JadedsShinies"
@@ -79,4 +80,12 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+
+curse {
+    projectId = '230360'
+    apiKey = project.curseForgeApiKey
+    releaseType = 'release'
+	addGameVersion '1.7.10'
 }
