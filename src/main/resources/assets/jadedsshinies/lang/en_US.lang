@@ -8,3 +8,11 @@ material.materialmithril=Mana Infused
 material.materialenderium=Endearing
 material.materialsignalum=Signalum
 material.materiallumium=Illuminati
+
+material.manasteel.ability=Writable
+material.materialenderium=Writable
+material.materiallumium.ability=Writable
+material.materialsignalum.ability=Writabler
+material.terrasteel.ability=Writablest
+material.materialwitheriron.ability=Writablest
+
