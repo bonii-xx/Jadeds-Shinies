@@ -36,8 +36,8 @@ public class JadedActiveToolMod extends ActiveToolMod {
     boolean feedback = false;
 
     NBTTagCompound tags = stack.getTagCompound().getCompoundTag("InfiTool");
-    feedback |= ToolEvents.getPartCount(tags, JadedsShinies.WITHER_ID) > 0;
-    feedback |= ToolEvents.getPartCount(tags, JadedsShinies.TERRASTEEL_ID) > 0;
+    feedback = ToolEvents.getPartCount(tags, JadedsShinies.WITHER_ID) > 0;
+    feedback &= ToolEvents.getPartCount(tags, JadedsShinies.TERRASTEEL_ID) > 0;
 
     return feedback;
   }
