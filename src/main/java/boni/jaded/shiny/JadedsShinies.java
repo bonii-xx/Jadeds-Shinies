@@ -87,17 +87,33 @@ public class JadedsShinies {
 
   @EventHandler
   public void init(FMLInitializationEvent event) {
+    PatternBuilder patternBuilder = PatternBuilder.instance;
+
+    ItemStack signalum = GameRegistry.findItemStack("ThermalFoundation", "ingotSignalum", 1);
+    ItemStack enderium = GameRegistry.findItemStack("ThermalFoundation", "ingotEnderium", 1);
+    ItemStack lumium = GameRegistry.findItemStack("ThermalFoundation", "ingotLumium", 1);
+    ItemStack mithril = GameRegistry.findItemStack("ThermalFoundation", "ingotMithril", 1);
+
+    if(signalum != null)
+      patternBuilder.registerFullMaterial(signalum, 2, "materialSignalum", new ItemStack(TinkerTools.toolShard, 1, SIGNALUM_ID), new ItemStack(TinkerTools.toolRod, 1, SIGNALUM_ID), SIGNALUM_ID);
+    if(enderium != null)
+      patternBuilder.registerFullMaterial(enderium, 2, "materialEnderium", new ItemStack(TinkerTools.toolShard, 1, ENDERIUM_ID), new ItemStack(TinkerTools.toolRod, 1, ENDERIUM_ID), ENDERIUM_ID);
+    if(lumium != null)
+      patternBuilder.registerFullMaterial(lumium, 2, "materialLumium", new ItemStack(TinkerTools.toolShard, 1, LUMIUM_ID), new ItemStack(TinkerTools.toolRod, 1, LUMIUM_ID), LUMIUM_ID);
+    if(mithril != null)
+      patternBuilder.registerFullMaterial(mithril, 2, "materialMithril", new ItemStack(TinkerTools.toolShard, 1, MITHRIL_ID), new ItemStack(TinkerTools.toolRod, 1, MITHRIL_ID), MITHRIL_ID);
+
     // solid parts
     boolean registered = false;
     for(ItemStack onion : OreDictionary.getOres("cropOnion")) {
       if(!registered) {
-        PatternBuilder.instance
+        patternBuilder
             .registerFullMaterial(onion, 1, "materialOnion", new ItemStack(TinkerTools.toolShard, 1, ONION_ID),
                                   new ItemStack(TinkerTools.toolRod, 1, ONION_ID), ONION_ID);
         registered = true;
       }
       else {
-        PatternBuilder.instance.registerMaterial(onion, 1, "materialOnion");
+        patternBuilder.registerMaterial(onion, 1, "materialOnion");
       }
 
       registerPartBuilding(ONION_ID);
@@ -113,8 +129,10 @@ public class JadedsShinies {
 
     // wither-iron if present
     ItemStack witherIron = GameRegistry.findItemStack("progressiveautomation", "WitherIron", 1);
-    if(witherIron != null)
+    if(witherIron != null) {
+      patternBuilder.registerFullMaterial(witherIron, 2, "materialwitherIron", new ItemStack(TinkerTools.toolShard, 1, WITHER_ID), new ItemStack(TinkerTools.toolRod, 1, WITHER_ID), WITHER_ID);
       Smeltery.addMelting(FluidType.getFluidType("WitherIron"), witherIron, 0, TConstruct.ingotLiquidValue);
+    }
 
     // liquid parts
     registerCasting(witherironFluid, WITHER_ID);
