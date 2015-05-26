@@ -10,7 +10,7 @@ material.materialsignalum=Signalum
 material.materiallumium=Illuminati
 
 material.manasteel.ability=Writable
-material.materialenderium=Writable
+material.materialenderium.ability=Writable
 material.materiallumium.ability=Writable
 material.materialsignalum.ability=Writabler
 material.terrasteel.ability=Writablest
