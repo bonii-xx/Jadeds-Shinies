@@ -91,6 +91,7 @@ public class JadedsShinies {
     plassteelIngot.setTextureName(MODID.toLowerCase() + ":plassteel_ingot");
 
     GameRegistry.registerItem(plassteelIngot, "plassteelIngot");
+    OreDictionary.registerOre("ingotPlassteel", plassteelIngot);
 
     MinecraftForge.EVENT_BUS.register(new ToolEvents());
   }
