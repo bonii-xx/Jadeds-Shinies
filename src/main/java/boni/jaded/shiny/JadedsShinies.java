@@ -2,6 +2,7 @@ package boni.jaded.shiny;
 
 import net.minecraft.block.material.Material;
 import net.minecraft.init.Blocks;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraftforge.common.MinecraftForge;
@@ -56,6 +57,8 @@ public class JadedsShinies {
   public static Fluid plasticFluid;
   public static Fluid witherironFluid;
 
+  public static Item plassteelIngot;
+
   @EventHandler
   public void preInit(FMLPreInitializationEvent event) {
     // Custom materials
@@ -81,6 +84,13 @@ public class JadedsShinies {
     FluidType.registerFluidType("PlasSteel", TinkerSmeltery.glueBlock, 0, 200, plassteelFluid, true);
     FluidType.registerFluidType("Plastic", TinkerSmeltery.glueBlock, 0, 200, plasticFluid, true);
     FluidType.registerFluidType("WitherIron", Blocks.iron_block, 0, 200, witherironFluid, true);
+
+    plassteelIngot = new Item();
+    plassteelIngot.setCreativeTab(TConstructRegistry.materialTab);
+    plassteelIngot.setUnlocalizedName(MODID.toLowerCase() + ".plassteelIngot");
+    plassteelIngot.setTextureName(MODID.toLowerCase() + ":plassteel_ingot");
+
+    GameRegistry.registerItem(plassteelIngot, "plassteelIngot");
 
     MinecraftForge.EVENT_BUS.register(new ToolEvents());
   }
@@ -137,6 +147,19 @@ public class JadedsShinies {
     // liquid parts
     registerCasting(witherironFluid, WITHER_ID);
     registerCasting(plassteelFluid, PLASSTEEL_ID);
+
+    // register plassteel ingot casting/melting
+    LiquidCasting tableCasting = TConstructRegistry.getTableCasting();
+    ItemStack pattern = new ItemStack(TinkerSmeltery.metalPattern, 1, 0);
+    tableCasting.addCastingRecipe(pattern, new FluidStack(TinkerSmeltery.moltenAlubrassFluid, TConstruct.ingotLiquidValue), new ItemStack(plassteelIngot), false, 50);
+    tableCasting.addCastingRecipe(pattern, new FluidStack(TinkerSmeltery.moltenGoldFluid, TConstruct.ingotLiquidValue * 2), new ItemStack(plassteelIngot), false, 50);
+    tableCasting.addCastingRecipe(new ItemStack(plassteelIngot), new FluidStack(plassteelFluid, TConstruct.ingotLiquidValue), pattern, 80);
+    Smeltery.addMelting(FluidType.getFluidType("PlasSteel"), new ItemStack(plassteelIngot), 0,
+                        TConstruct.ingotLiquidValue);
+
+    patternBuilder.registerFullMaterial(plassteelIngot, 2, "materialPlassteel",
+                                        new ItemStack(TinkerTools.toolShard, 1, PLASSTEEL_ID),
+                                        new ItemStack(TinkerTools.toolRod, 1, PLASSTEEL_ID), PLASSTEEL_ID);
 
     if(Loader.isModLoaded("MineFactoryReloaded"))
       registerCasting(plasticFluid, PLASTIC_ID);
